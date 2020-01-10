@@ -10,15 +10,6 @@ namespace ND2
         {
             List<int> skaiciai = new List<int>();
 
-            //   int skaicius = 192756;
-            //  int[] skaiciuMasyvas = new int[6];
-            //  int[] a1 = new int[] { 1, 2, 4, 3 };
-            //  int[] a2 = new int[] { 4, 3, 2, 1 };
-        //    List<bool> bolenas = new List<bool>(); 
-        //    int [] daugikliai = new int[] {2,3,4,5,6};
-
-            //Console.WriteLine(ConvertIntToIntArray(skaicius));
-
                foreach (int item in sugeneruotiSesiazenkliusSkaicius(skaiciai))
                {
                 if (IsArrayValuesUnique(ConvertIntToIntArray(item)))
@@ -36,34 +27,25 @@ namespace ND2
                             DoTwoArraysHaveSameElementsButInDifferentIndexes(ConvertIntToIntArray(item), ConvertIntToIntArray(padaugintaIs6)))
                         {
                             Console.WriteLine("Magiškas sesiazenklis skaicius yra: " + item);
-                        }
-
-                   
+                        }               
                 }
                 } 
                }
 
-          //  Console.WriteLine(CompareTwoArrays(a1, a2));
-
             static int[] ConvertIntToIntArray(int skaicius)
             {
                 string laikinas = skaicius.ToString();
-                //   Console.WriteLine(laikinas);
-                //char[] simboliuMasyvas = laikinas.ToCharArray();
                 int[] skaiciuMasyvas = new int[laikinas.Length];
                 for (int i = 0; i < laikinas.Length; i++)
                 {
                     char simbolis = laikinas[i];
-                    // Console.WriteLine(simbolis);
                     int skaiciusSk = int.Parse(simbolis.ToString());
-                    //   Console.WriteLine(skaiciusSk);
                     skaiciuMasyvas[i] = skaiciusSk;
 
                 }
                 return skaiciuMasyvas;
             }
-
-
+        
             static bool IsArrayValuesUnique(int[] skaiciuMasyvas)
             {
                 for (int i = 0; i < skaiciuMasyvas.Length; i++)
@@ -78,7 +60,7 @@ namespace ND2
                 }
               return true;
                 
-                /*  su linqu          
+                /*  su linqu  butu        
                  *                 List<int> laikinasListas = new List<int>();
                                    laikinasListas.AddRange(skaiciuMasyvas);
                  *  
@@ -116,11 +98,8 @@ namespace ND2
                     {
                         if (skaiciuMasyvas[k] != skaiciuMasyvas2[k])
                         {
-   //                         Console.WriteLine("good");
                             listDiff.Add(k);
                         }
-   //                     else
-   //                         Console.WriteLine("bad");
                     }
 
                     if (listDiff.Count == skaiciuMasyvas.Length)
