@@ -8,128 +8,125 @@ namespace ND2
     {
         static void Main()
         {
-            List<int> skaiciai = new List<int>();
-
-               foreach (int item in sugeneruotiSesiazenkliusSkaicius(skaiciai))
-               {
+            foreach (int item in sugeneruotiSesiazenkliusSkaicius())
+            {
                 if (IsArrayValuesUnique(ConvertIntToIntArray(item)))
                 {
-                         int padaugintaIs2 = item * 2;
-                         int padaugintaIs3 = item * 3;
-                         int padaugintaIs4 = item * 4;
-                         int padaugintaIs5 = item * 5;
-                         int padaugintaIs6 = item * 6;
+                    int padaugintaIs2 = item * 2;
+                    int padaugintaIs3 = item * 3;
+                    int padaugintaIs4 = item * 4;
+                    int padaugintaIs5 = item * 5;
+                    int padaugintaIs6 = item * 6;
 
-                        if (DoTwoArraysHaveSameElementsButInDifferentIndexes(ConvertIntToIntArray(item), ConvertIntToIntArray(padaugintaIs2)) &&
-                            DoTwoArraysHaveSameElementsButInDifferentIndexes(ConvertIntToIntArray(item), ConvertIntToIntArray(padaugintaIs3)) &&
-                            DoTwoArraysHaveSameElementsButInDifferentIndexes(ConvertIntToIntArray(item), ConvertIntToIntArray(padaugintaIs4)) &&
-                            DoTwoArraysHaveSameElementsButInDifferentIndexes(ConvertIntToIntArray(item), ConvertIntToIntArray(padaugintaIs5)) &&
-                            DoTwoArraysHaveSameElementsButInDifferentIndexes(ConvertIntToIntArray(item), ConvertIntToIntArray(padaugintaIs6)))
-                        {
-                            Console.WriteLine("Magiškas sesiazenklis skaicius yra: " + item);
-                        }               
+                    if (DoTwoArraysHaveSameElementsButInDifferentIndexes(ConvertIntToIntArray(item), ConvertIntToIntArray(padaugintaIs2)) &&
+                        DoTwoArraysHaveSameElementsButInDifferentIndexes(ConvertIntToIntArray(item), ConvertIntToIntArray(padaugintaIs3)) &&
+                        DoTwoArraysHaveSameElementsButInDifferentIndexes(ConvertIntToIntArray(item), ConvertIntToIntArray(padaugintaIs4)) &&
+                        DoTwoArraysHaveSameElementsButInDifferentIndexes(ConvertIntToIntArray(item), ConvertIntToIntArray(padaugintaIs5)) &&
+                        DoTwoArraysHaveSameElementsButInDifferentIndexes(ConvertIntToIntArray(item), ConvertIntToIntArray(padaugintaIs6)))
+                    {
+                        Console.WriteLine("Magiškas sesiazenklis skaicius yra: " + item);
+                    }
                 }
-                } 
-               }
-
-            static int[] ConvertIntToIntArray(int skaicius)
-            {
-                string laikinas = skaicius.ToString();
-                int[] skaiciuMasyvas = new int[laikinas.Length];
-                for (int i = 0; i < laikinas.Length; i++)
-                {
-                    char simbolis = laikinas[i];
-                    int skaiciusSk = int.Parse(simbolis.ToString());
-                    skaiciuMasyvas[i] = skaiciusSk;
-
-                }
-                return skaiciuMasyvas;
             }
-        
-            static bool IsArrayValuesUnique(int[] skaiciuMasyvas)
+        }
+
+        static int[] ConvertIntToIntArray(int skaicius)
+        {
+            string laikinas = skaicius.ToString();
+            int[] skaiciuMasyvas = new int[laikinas.Length];
+            for (int i = 0; i < laikinas.Length; i++)
             {
-                for (int i = 0; i < skaiciuMasyvas.Length; i++)
+                char simbolis = laikinas[i];
+                int skaiciusSk = int.Parse(simbolis.ToString());
+                skaiciuMasyvas[i] = skaiciusSk;
+
+            }
+            return skaiciuMasyvas;
+        }
+
+        static bool IsArrayValuesUnique(int[] skaiciuMasyvas)
+        {
+            for (int i = 0; i < skaiciuMasyvas.Length; i++)
+            {
+                for (int j = i + 1; j < skaiciuMasyvas.Length; j++)
                 {
-                    for (int j = i + 1; j < skaiciuMasyvas.Length; j++)
+                    if (skaiciuMasyvas[i] == skaiciuMasyvas[j])
                     {
-                        if (skaiciuMasyvas[i] == skaiciuMasyvas[j])
-                        {
-                             return false;
-                        }
+                        return false;
                     }
                 }
-              return true;
-                
-                /*  su linqu  butu        
-                 *                 List<int> laikinasListas = new List<int>();
-                                   laikinasListas.AddRange(skaiciuMasyvas);
-                 *  
-                 *  
-                  if (laikinasListas.Distinct().Count() == laikinasListas.Count())
-                   {
-                      return true;
-                  }
-                  return false;
-                */
             }
+            return true;
 
+            /*  su linqu  butu        
+             *                 List<int> laikinasListas = new List<int>();
+                               laikinasListas.AddRange(skaiciuMasyvas);
+             *  
+             *  
+              if (laikinasListas.Distinct().Count() == laikinasListas.Count())
+               {
+                  return true;
+              }
+              return false;
+            */
+        }
 
-
-            static bool DoTwoArraysHaveSameElementsButInDifferentIndexes(int[] skaiciuMasyvas, int[] skaiciuMasyvas2)
+        static bool DoTwoArraysHaveSameElementsButInDifferentIndexes(int[] skaiciuMasyvas, int[] skaiciuMasyvas2)
+        {
+            if (skaiciuMasyvas.Length == skaiciuMasyvas2.Length)
             {
-                if (skaiciuMasyvas.Length == skaiciuMasyvas2.Length)
+                List<int> listDiff = new List<int>();
+
+                int[] pirmasLaikinasMasyvas = (int[])skaiciuMasyvas.Clone();
+                int[] antrasLaikinasMasyvas = (int[])skaiciuMasyvas2.Clone();
+                Array.Sort(pirmasLaikinasMasyvas);
+                Array.Sort(antrasLaikinasMasyvas);
+
+                for (int i = 0; i < pirmasLaikinasMasyvas.Length; i++)
                 {
-                    List<int> listDiff = new List<int>();
-
-                    int[] pirmasLaikinasMasyvas = (int[])skaiciuMasyvas.Clone();
-                    int[] antrasLaikinasMasyvas = (int[])skaiciuMasyvas2.Clone();
-                    Array.Sort(pirmasLaikinasMasyvas);
-                    Array.Sort(antrasLaikinasMasyvas);
-
-                    for (int i = 0; i < pirmasLaikinasMasyvas.Length; i++)
+                    if (pirmasLaikinasMasyvas[i] != antrasLaikinasMasyvas[i])
                     {
-                        if (pirmasLaikinasMasyvas[i] != antrasLaikinasMasyvas[i])
-                        {
-                            return false;
-                        }
+                        return false;
                     }
+                }
 
-                    for (int k = 0; k < skaiciuMasyvas.Length; k++)
+                for (int k = 0; k < skaiciuMasyvas.Length; k++)
+                {
+                    if (skaiciuMasyvas[k] != skaiciuMasyvas2[k])
                     {
-                        if (skaiciuMasyvas[k] != skaiciuMasyvas2[k])
-                        {
-                            listDiff.Add(k);
-                        }
+                        listDiff.Add(k);
                     }
+                }
 
-                    if (listDiff.Count == skaiciuMasyvas.Length)
-                    {
-                        return true;
-                    }
-                    return false;
-                }           
-                return false;
-
-                /* su linqu butu tik tiek:
-                if (skaiciuMasyvas.Count() == skaiciuMasyvas2.Count() && !skaiciuMasyvas.Except(skaiciuMasyvas2).Any())
+                if (listDiff.Count == skaiciuMasyvas.Length)
                 {
                     return true;
                 }
                 return false;
-                */
             }
+            return false;
 
-
-            static List<int> sugeneruotiSesiazenkliusSkaicius(List<int> skaiciai)
+            /* su linqu butu tik tiek:
+            if (skaiciuMasyvas.Count() == skaiciuMasyvas2.Count() && !skaiciuMasyvas.Except(skaiciuMasyvas2).Any())
             {
-                for (int i = 100000; i < 1000000; i++)
-                {
-                    skaiciai.Add(i);
-                }
-            return skaiciai;
+                return true;
             }
-
+            return false;
+            */
         }
+
+
+        static List<int> sugeneruotiSesiazenkliusSkaicius()
+        {
+            List<int> skaiciai = new List<int>();
+            for (int i = 100000; i < 1000000; i++)
+            {
+                skaiciai.Add(i);
+            }
+            return skaiciai;
+        }
+
     }
-    
+}
+
 
